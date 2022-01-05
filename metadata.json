@@ -34,7 +34,7 @@
     }
   ],
   "description": "A giant Puppet module for OS X. Abstracts all the things.",
-  "pdk-version": "2.2.0",
+  "pdk-version": "2.3.0",
   "template-url": "https://github.com/puppetlabs/pdk-templates.git#2.0.0",
   "template-ref": "tags/2.0.0-0-ge838f1d"
 }
