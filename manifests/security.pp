@@ -105,9 +105,9 @@ class managedmac::security (
 
 ) {
 
-  unless $ask_for_password == undef {
+  # unless $ask_for_password == undef {
     # validate_bool ($ask_for_password)
-  }
+  # }
 
   unless $ask_for_password_delay == undef {
     unless is_integer($ask_for_password_delay) {
@@ -115,29 +115,29 @@ class managedmac::security (
     }
   }
 
-  unless $disable_autologin == undef {
+  # unless $disable_autologin == undef {
     # validate_bool ($disable_autologin)
-  }
+  # }
 
-  unless $gatekeeper_enable_assessment == undef {
+  # unless $gatekeeper_enable_assessment == undef {
     # validate_bool ($gatekeeper_enable_assessment)
-  }
+  # }
 
-  unless $gatekeeper_allow_identified_developers == undef {
+  # unless $gatekeeper_allow_identified_developers == undef {
     # validate_bool ($gatekeeper_allow_identified_developers)
-  }
+  # }
 
-  unless $gatekeeper_enable_assessment == undef {
+  # unless $gatekeeper_enable_assessment == undef {
     # validate_bool ($gatekeeper_enable_assessment)
-  }
+  # }
 
-  unless $dont_allow_lock_message_ui == undef {
+  # unless $dont_allow_lock_message_ui == undef {
     # validate_bool ($dont_allow_lock_message_ui)
-  }
+  # }
 
-  unless $dont_allow_password_reset_ui == undef {
+  # unless $dont_allow_password_reset_ui == undef {
     # validate_bool ($dont_allow_password_reset_ui)
-  }
+  # }
 
   $params = {
     'com.apple.systempolicy.managed' => {
