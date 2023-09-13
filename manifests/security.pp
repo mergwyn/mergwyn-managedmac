@@ -109,11 +109,11 @@ class managedmac::security (
     # validate_bool ($ask_for_password)
   # }
 
-  unless $ask_for_password_delay == undef {
-    unless is_integer($ask_for_password_delay) {
-      fail("ask_for_password_delay not an Integer: ${ask_for_password_delay}")
-    }
-  }
+#  unless $ask_for_password_delay == undef {
+#    unless is_integer($ask_for_password_delay) {
+#      fail("ask_for_password_delay not an Integer: ${ask_for_password_delay}")
+#    }
+#  }
 
   # unless $disable_autologin == undef {
     # validate_bool ($disable_autologin)

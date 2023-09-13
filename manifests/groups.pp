@@ -47,9 +47,9 @@ class managedmac::groups (
   Hash $defaults                        = {}
 ) {
 
-  if is_hash(hiera('managedmac::activedirectory::enable', false)) {
-    require managedmac::activedirectory
-  }
+#  if is_hash(hiera('managedmac::activedirectory::enable', false)) {
+#    require managedmac::activedirectory
+#  }
 
   unless $accounts == undef {
     if empty ($accounts) {
