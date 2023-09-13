@@ -86,10 +86,10 @@ class managedmac::screensharing (
       $acl_group     = 'com.apple.access_screensharing'
       $admin_guid    = 'ABCDEFAB-CDEF-ABCD-EFAB-CDEF00000050'
 
-      validate_bool ($enable)
+      # validate_bool ($enable)
 
-      validate_array ($users)
-      validate_array ($groups)
+      # validate_array ($users)
+      # validate_array ($groups)
 
       $users_attr = $enable ? {
         true  => $users,

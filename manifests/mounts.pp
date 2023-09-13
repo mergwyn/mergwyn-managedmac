@@ -49,7 +49,7 @@
 #
 class managedmac::mounts ($urls = []) {
 
-  validate_array ($urls)
+  #validate_array ($urls)
 
   $params_are_set = empty($urls)
 

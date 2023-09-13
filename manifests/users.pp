@@ -85,8 +85,8 @@ class managedmac::users (
 
   unless empty ($accounts) {
 
-    validate_raw_constructor ($accounts)
-    validate_hash ($defaults)
+    # validate_raw_constructor ($accounts)
+    # validate_hash ($defaults)
     create_resources(user, $accounts, $defaults)
 
   }

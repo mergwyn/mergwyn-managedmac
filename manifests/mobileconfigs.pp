@@ -83,8 +83,8 @@ class managedmac::mobileconfigs (
 
   unless empty ($payloads) {
 
-    validate_raw_constructor ($payloads)
-    validate_hash ($defaults)
+    #validate_raw_constructor ($payloads)
+    #validate_hash ($defaults)
     create_resources(mobileconfig, $payloads, $defaults)
 
   }

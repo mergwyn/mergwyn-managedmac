@@ -106,7 +106,7 @@ class managedmac::security (
 ) {
 
   unless $ask_for_password == undef {
-    validate_bool ($ask_for_password)
+    # validate_bool ($ask_for_password)
   }
 
   unless $ask_for_password_delay == undef {
@@ -116,27 +116,27 @@ class managedmac::security (
   }
 
   unless $disable_autologin == undef {
-    validate_bool ($disable_autologin)
+    # validate_bool ($disable_autologin)
   }
 
   unless $gatekeeper_enable_assessment == undef {
-    validate_bool ($gatekeeper_enable_assessment)
+    # validate_bool ($gatekeeper_enable_assessment)
   }
 
   unless $gatekeeper_allow_identified_developers == undef {
-    validate_bool ($gatekeeper_allow_identified_developers)
+    # validate_bool ($gatekeeper_allow_identified_developers)
   }
 
   unless $gatekeeper_enable_assessment == undef {
-    validate_bool ($gatekeeper_enable_assessment)
+    # validate_bool ($gatekeeper_enable_assessment)
   }
 
   unless $dont_allow_lock_message_ui == undef {
-    validate_bool ($dont_allow_lock_message_ui)
+    # validate_bool ($dont_allow_lock_message_ui)
   }
 
   unless $dont_allow_password_reset_ui == undef {
-    validate_bool ($dont_allow_password_reset_ui)
+    # validate_bool ($dont_allow_password_reset_ui)
   }
 
   $params = {
