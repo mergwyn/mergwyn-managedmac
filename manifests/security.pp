@@ -105,39 +105,39 @@ class managedmac::security (
 
 ) {
 
-  unless $ask_for_password == undef {
-    validate_bool ($ask_for_password)
-  }
+  # unless $ask_for_password == undef {
+    # validate_bool ($ask_for_password)
+  # }
 
-  unless $ask_for_password_delay == undef {
-    unless is_integer($ask_for_password_delay) {
-      fail("ask_for_password_delay not an Integer: ${ask_for_password_delay}")
-    }
-  }
+#  unless $ask_for_password_delay == undef {
+#    unless is_integer($ask_for_password_delay) {
+#      fail("ask_for_password_delay not an Integer: ${ask_for_password_delay}")
+#    }
+#  }
 
-  unless $disable_autologin == undef {
-    validate_bool ($disable_autologin)
-  }
+  # unless $disable_autologin == undef {
+    # validate_bool ($disable_autologin)
+  # }
 
-  unless $gatekeeper_enable_assessment == undef {
-    validate_bool ($gatekeeper_enable_assessment)
-  }
+  # unless $gatekeeper_enable_assessment == undef {
+    # validate_bool ($gatekeeper_enable_assessment)
+  # }
 
-  unless $gatekeeper_allow_identified_developers == undef {
-    validate_bool ($gatekeeper_allow_identified_developers)
-  }
+  # unless $gatekeeper_allow_identified_developers == undef {
+    # validate_bool ($gatekeeper_allow_identified_developers)
+  # }
 
-  unless $gatekeeper_enable_assessment == undef {
-    validate_bool ($gatekeeper_enable_assessment)
-  }
+  # unless $gatekeeper_enable_assessment == undef {
+    # validate_bool ($gatekeeper_enable_assessment)
+  # }
 
-  unless $dont_allow_lock_message_ui == undef {
-    validate_bool ($dont_allow_lock_message_ui)
-  }
+  # unless $dont_allow_lock_message_ui == undef {
+    # validate_bool ($dont_allow_lock_message_ui)
+  # }
 
-  unless $dont_allow_password_reset_ui == undef {
-    validate_bool ($dont_allow_password_reset_ui)
-  }
+  # unless $dont_allow_password_reset_ui == undef {
+    # validate_bool ($dont_allow_password_reset_ui)
+  # }
 
   $params = {
     'com.apple.systempolicy.managed' => {

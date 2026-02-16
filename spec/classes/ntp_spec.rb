@@ -19,7 +19,7 @@ describe 'managedmac::ntp' do
           { enable: 'whatever' }
         end
 
-        it { is_expected.to raise_error(Puppet::Error, %r{not a boolean}) }
+        it { is_expected.to raise_error(Puppet::PreformattedError, %r{Evaluation Error: Error while evaluating a Resource Statement}) }
       end
 
       context 'when $servers is invalid' do
@@ -27,7 +27,7 @@ describe 'managedmac::ntp' do
           { enable: 'whatever' }
         end
 
-        it { is_expected.to raise_error(Puppet::Error, %r{not a boolean}) }
+        it { is_expected.to raise_error(Puppet::PreformattedError, %r{Evaluation Error: Error while evaluating a Resource Statement}) }
       end
 
       context 'when $enable == undef' do
@@ -66,8 +66,13 @@ describe 'managedmac::ntp' do
         end
 
         specify do
-          is_expected.to contain_file('ntp_conf').that_comes_before("Service[#{service}]")\
-                                                 .with('content' => "server\stime.apple.com\nserver\stime1.google.com")
+          is_expected.to contain_file('ntp_conf').that_comes_before("Service[#{service}]").with(
+            'content' => <<-DOC.gsub(%r{^\s+}, '')
+                              # This file is managed by Puppet, and is refreshed regularly.
+                              server time.apple.com
+                              server time1.google.com
+                            DOC
+          )
         end
         specify do
           is_expected.to contain_service(service).that_requires('File[ntp_conf]')\

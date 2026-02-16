@@ -94,10 +94,10 @@ class managedmac::sshd (
     $acl_group_disabled = 'com.apple.access_ssh-disabled'
     $admin_guid         = 'ABCDEFAB-CDEF-ABCD-EFAB-CDEF00000050'
 
-    validate_bool ($enable)
+    # validate_bool ($enable)
 
     unless $sshd_config == undef {
-      validate_re ($sshd_config, '\A(puppet:\/\/)?(\/.+)+\z')
+      # validate_re ($sshd_config, '\A(puppet:\/\/)?(\/.+)+\z')
       file { 'sshd_config':
         ensure => file,
         owner  => 'root',
@@ -110,7 +110,7 @@ class managedmac::sshd (
     }
 
     unless $sshd_banner == undef {
-      validate_re ($sshd_banner, '\A(puppet:\/\/)?(\/.+)+\z')
+      # validate_re ($sshd_banner, '\A(puppet:\/\/)?(\/.+)+\z')
       file { 'sshd_banner':
         ensure => file,
         owner  => 'root',
@@ -122,8 +122,8 @@ class managedmac::sshd (
       }
     }
 
-    validate_array ($users)
-    validate_array ($groups)
+    # validate_array ($users)
+    # validate_array ($groups)
 
     $users_attr = $enable ? {
       true  => $users,

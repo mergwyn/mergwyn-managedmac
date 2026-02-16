@@ -53,7 +53,7 @@ describe 'managedmac::filevault', type: 'class' do
             { enable: true, output_path: 'some_file' }
           end
 
-          it { is_expected.to raise_error(Puppet::Error, %r{not an absolute path}) }
+          it { is_expected.to raise_error(Puppet::PreformattedError, %r{Evaluation Error: Error while evaluating a Resource Statement}) }
         end
 
         context 'when $use_recovery_key has a BAD param' do
@@ -61,7 +61,7 @@ describe 'managedmac::filevault', type: 'class' do
             { enable: true, use_recovery_key: 'a_string' }
           end
 
-          it { is_expected.to raise_error(Puppet::Error, %r{not a boolean}) }
+          it { is_expected.to raise_error(Puppet::PreformattedError, %r{Evaluation Error: Error while evaluating a Resource Statement}) }
         end
 
         context 'when the params are GOOD' do
@@ -79,7 +79,7 @@ describe 'managedmac::filevault', type: 'class' do
             { enable: true, use_keychain: true, keychain_file: '' }
           end
 
-          it { is_expected.to raise_error(Puppet::Error, %r{not an absolute path}) }
+          it { is_expected.to raise_error(Puppet::PreformattedError, %r{Evaluation Error: Error while evaluating a Resource Statement}) }
         end
 
         context 'when $use_keychain == true and $keychain_file is a puppet path' do

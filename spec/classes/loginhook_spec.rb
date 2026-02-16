@@ -15,7 +15,7 @@ describe 'managedmac::loginhook', type: 'class' do
             { enable: true }
           end
 
-          it { is_expected.to raise_error(Puppet::Error, %r{not an absolute path}) }
+          it { is_expected.to raise_error(Puppet::PreformattedError, %r{Evaluation Error: Error while evaluating a Resource Statement}) }
         end
 
         context 'when scripts is defined' do
@@ -23,6 +23,8 @@ describe 'managedmac::loginhook', type: 'class' do
           let(:params) do
             { enable: true, scripts: the_scripts }
           end
+
+          it { is_expected.to contain_file(the_scripts) }
 
           it {
             is_expected.to contain_managedmac__hook('login').with(

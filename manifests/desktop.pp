@@ -1,70 +1,43 @@
-# == Class: managedmac::desktop
+# @summary
+#   Leverages the Mobileconfig type to deploy a Desktop Picture profile.
 #
-# Leverages the Mobileconfig type to deploy a Desktop Picture profile.
+# @note
+#   All of the parameter defaults are 'undef' so including/containing the class
+#   is not sufficient for confguration. You must activate the params by giving
+#   them a value.
 #
-# All of the parameter defaults are 'undef' so including/containing the class
-# is not sufficient for confguration. You must activate the params by giving
-# them a value.
+# @note
+#   Currently there is a bug with this profile setting that does
+#   not allow users to change the desktop picture regardless of the
+#   'locked' setting.
 #
-# Note: Currently there is a bug with this profile setting that does
-# not allow users to change the desktop picture regardless of the
-# 'locked' setting.
-#
-# === Parameters
-#
-# [*override_picture_path*]
+# @param override_picture_path
 #   Set the path of the default desktop picture on OS X.
-#   Type: String
-#   Default: undef
 #
-# [*locked*]
+# @param locked
 #   This locks the value of the desktop picture so that users can
 #   select their own picture or not (read Note above).
-#   Type: Boolean
-#   Default: undef
-#
-# === Variables
-#
-# Not applicable
-#
-# === Examples
-#
-# This class was designed to be used with Hiera. As such, the best way to pass
-# options is to specify them in your Hiera datadir:
-#
-#  # Example: defaults.yaml
+# @example defaults.yaml
 #  ---
 #  managedmac::desktop::override_picture_path:
 #    "/Library/Desktop Pictures/Abstract.jpg"
 #  managedmac::desktop::locked: true
 #
-# Then simply, create a manifest and include the class...
-#
-#  # Example: my_manifest.pp
+# @example my_manifest.pp
 #  include managedmac::desktop
 #
 # If you just wish to test the functionality of this class, you could also do
 # something along these lines:
 #
+# @example simplte configuration
 #  class { 'managedmac::desktop':
 #    override_picture_path  => '/Library/Desktop Pictures/Abstract.jpg',
 #    locked                 => true,
 #  }
 #
-# === Authors
-#
-# Clayton Burlison <clburlison@gmail.com>
-# Brian Warsing <bcw@sfu.ca>
-#
-# === Copyright
-#
-# Copyright 2015 SFU, unless otherwise noted.
-#
 class managedmac::desktop (
-
   Optional[Stdlib::Absolutepath] $override_picture_path = undef,
   Optional[Boolean] $locked                             = undef,
-
 ) {
 
   $params = {

@@ -73,13 +73,14 @@ class Puppet::Provider::MobileConfig < Puppet::Provider
       # https://github.com/dayglojesus/managedmac/issues/21
       # They changed this key to match what it would be if it
       # were in a Payload. Yay, parity?
-      removal_disallowed_key = if profile['ProfileUninstallPolicy']
-                                 # Mavericks
-                                 (profile['ProfileUninstallPolicy'] == 'allowed') ? 'false' : 'true'
-                               else
-                                 # Yosemite
-                                 profile['ProfileRemovalDisallowed']
-                               end
+      # TODO confirm deletion
+      #      removal_disallowed_key = if profile['ProfileUninstallPolicy']
+      #                                 # Mavericks
+      #                                 (profile['ProfileUninstallPolicy'] == 'allowed') ? 'false' : 'true'
+      #                               else
+      #                                 # Yosemite
+      #                                 profile['ProfileRemovalDisallowed']
+      #                               end
 
       # Prepare the content array for insertion into the resource
       content = prepare_content(profile['ProfileItems'])
@@ -90,7 +91,8 @@ class Puppet::Provider::MobileConfig < Puppet::Provider
         description: profile['ProfileDescription'],
         displayname: profile['ProfileDisplayName'],
         organization: profile['ProfileOrganization'],
-        removaldisallowed: removal_disallowed_key,
+        # TODO: confirm deletion
+        #        removaldisallowed: removal_disallowed_key,
         provider: :mobileconfig,
         ensure: :present,
         content: content,
@@ -349,8 +351,9 @@ class Puppet::Provider::MobileConfig < Puppet::Provider
         'PayloadDescription'       => @resource[:description],
         'PayloadDisplayName'       => @resource[:displayname],
         'PayloadOrganization'      => @resource[:organization],
-        'PayloadRemovalDisallowed' =>
-          (@resource[:removaldisallowed] == :false) ? false : true,
+        # TODO: confirm deletion
+        #        'PayloadRemovalDisallowed' =>
+        #          (@resource[:removaldisallowed] == :false) ? false : true,
         'PayloadScope'             => 'System',
         'PayloadType'              => 'Configuration',
         'PayloadUUID'              => SecureRandom.uuid,

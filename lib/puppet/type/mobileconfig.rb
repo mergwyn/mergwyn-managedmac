@@ -187,16 +187,17 @@ Puppet::Type.newtype(:mobileconfig) do
     defaultto 'SFU'
   end
 
-  newproperty(:removaldisallowed) do
-    desc "Bool: whether or not to allow the removal of the profile.
-      Setting this to false means it can be removed. Don't blame me
-      for the stupid double-negative name, blame Apple.
-      Corresponds to the PayloadRemovalDisallowed key."
-    newvalues(:true, :false)
-    defaultto :false
-
-    def insync?(is)
-      is.to_sym == should.to_sym
-    end
-  end
+  # TODO: confirm deletion
+  #  newproperty(:removaldisallowed) do
+  #    desc "Bool: whether or not to allow the removal of the profile.
+  #      Setting this to false means it can be removed. Don't blame me
+  #      for the stupid double-negative name, blame Apple.
+  #      Corresponds to the PayloadRemovalDisallowed key."
+  #    newvalues(:true, :false)
+  #    defaultto :false
+  #
+  #    def insync?(is)
+  #      is.to_sym == should.to_sym
+  #    end
+  #  end
 end

@@ -86,8 +86,8 @@ class managedmac::propertylists (
 
   unless empty ($files) {
 
-    validate_raw_constructor ($files)
-    validate_hash ($defaults)
+    # validate_raw_constructor ($files)
+    # validate_hash ($defaults)
     create_resources(property_list, $files, $defaults)
 
   }

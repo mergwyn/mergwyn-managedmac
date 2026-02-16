@@ -1,95 +1,58 @@
-# == Class: managedmac::mcx
-#
+# @summary
 # Leverages the Puppet MCX type to deploy some options not available in
-# Configuration Profiles. If any parameters for this class are defined...
+# Configuration Profiles.
 #
+# @note If any parameters are defined:
 #   - Creates a new computer record in the DSLocal node, "mcx_puppet"
 #   - Applies the specified settings to the new computer record
 #
-#  By itself this class will force a refresh of MCX policy on each Puppet run.
-#
-# === Parameters
-#
-# [*bluetooth*]
+# @param bluetooth
 #   Enable or disable Bluetooth power and administrative controls.
 #   Accepts values: on/off, true/false, enable/disable. Values are enforced, so
 #   if you set it to on/true/enable, users will not be able to turn off the
 #   service.
-#   Type: String or Boolean
 #
-# [*wifi*]
-#   Enable or disable Airport power and administrative controls.
-#   Accepts values: on/off, true/false, enable/disable. Values are enforced, so
-#   if you set it to on/true/enable, users will not be able to turn off the
-#   service.
-#   Type: String or Boolean
+# @param wifi
+#   Enable or disable Airport power and administrative controls.  Accepts
+#   values: on/off, true/false, enable/disable. Values are enforced, so if you
+#   set it to on/true/enable, users will not be able to turn off the service.
 #
-# [*logintiems*]
-#   Accepts a list of items you want launched at login time. Paths are NOT
-#   validated.
-#   Type: Array
+# @param loginitems
+#   Accepts a list of items you want launched at login time. 
 #
-# [*suppress_icloud_setup*]
+# @param suppress_icloud_setup
 #   Suppress iCloud Setup dialogue for new users.
-#   Type: Boolean
 #
-# [*hidden_preference_panes*]
+# @param hidden_preference_panes
 #   A list of hidden System Preferences panes. Prefernce pane names MUST be
 #   specified by their reverse domain ID. (Eg. com.apple.preferences.icloud)
-#   Type: Array
 #
-# === Variables
-#
-# Not applicable
-#
-# === Examples
-#
-# This class was designed to be used with Hiera. As such, the best way to pass
-# options is to specify them in your Hiera datadir:
-#
-#  # Example: defaults.yaml
-#  ---
-#  managedmac::mcx::bluetooth: on
-#  managedmac::mcx::wifi: off
-#  managedmac::mcx::loginitems:
-#     - /Applications/Chess.app
-#  managedmac::mcx::suppress_icloud_setup: true
-#  managedmac::mcx::hidden_preference_panes:
-#     - com.apple.preferences.icloud
-#
-# Then simply, create a manifest and include the class...
-#
-#  # Example: my_manifest.pp
-#  include managedmac::mcx
-#
-# If you just wish to test the functionality of this class, you could also do
-# something along these lines:
-#
-# class { 'managedmac::mcx':
-#   bluetooth   => on,
-#   wifi        => off,
-#   loginitems  => ['/path/to/some/file'],
-# }
-#
-# === Authors
-#
-# Brian Warsing <bcw@sfu.ca>
-#
-# === Copyright
-#
-# Copyright 2015 SFU, unless otherwise noted.
+# @example defaults.yaml
+#      ---
+#      managedmac::mcx::bluetooth: on
+#      managedmac::mcx::wifi: off
+#      managedmac::mcx::loginitems:
+#         - /Applications/Chess.app
+#      managedmac::mcx::suppress_icloud_setup: true
+#      managedmac::mcx::hidden_preference_panes:
+#         - com.apple.preferences.icloud
+#    
+# @example my_manifest.pp
+#      include managedmac::mcx
+#    
+# @example Basic class
+#     class { 'managedmac::mcx':
+#       bluetooth   => on,
+#       wifi        => off,
+#       loginitems  => ['/path/to/some/file'],
+#     }
 #
 class managedmac::mcx (
-
-# TODO create a type for Optional[Variant[Boolean,Enum['true','on','enable','false','off','disable']]]
-  # lint:ignore:quoted_booleans
-  Optional[Variant[Boolean,Enum['true','on','enable','false','off','disable']]] $bluetooth = undef,
-  Optional[Variant[Boolean,Enum['true','on','enable','false','off','disable']]] $wifi = undef,
-  # lint:endignore
-  $loginitems                 = [],
-  $suppress_icloud_setup      = undef,
-  $hidden_preference_panes    = [],
-
+  Optional[Managedmac::Universalonoff] $bluetooth = undef,
+  Optional[Managedmac::Universalonoff] $wifi      = undef,
+  Array[Stdlib::Absolutepath] $loginitems         = [],
+  Optional[Boolean] $suppress_icloud_setup        = undef,
+  Array[Stdlib::Fqdn] $hidden_preference_panes    = [],
 ){
 
   $bluetooth_state = $bluetooth ? {
@@ -98,8 +61,7 @@ class managedmac::mcx (
     /off|false|disable/ => true,
     false               => true,
     undef               => undef,
-    default             => "Parameter Error: invalid value for :bluetooth, \
-${bluetooth}",
+    default             => fail("Parameter Error: invalid value for :bluetooth, ${bluetooth}"),
   }
 
   $wifi_state = $wifi ? {
@@ -108,25 +70,8 @@ ${bluetooth}",
     /off|false|disable/ => true,
     false               => true,
     undef               => undef,
-    default             => "Parameter Error: invalid value for :wifi, ${wifi}",
+    default             => fail("Parameter Error: invalid value for :wifi, ${wifi}"),
   }
-
-#TODO fix validation
-  #unless $bluetooth_state == undef {
-  #  validate_bool ($bluetooth_state)
-  #}
-
-  #unless $wifi_state == undef {
-  #  validate_bool ($wifi_state)
-  #}
-
-  validate_array ($loginitems)
-
-  unless $suppress_icloud_setup == undef {
-    validate_bool ($suppress_icloud_setup)
-  }
-
-  validate_array ($hidden_preference_panes)
 
   $content = process_mcx_options($bluetooth_state,
     $wifi_state, $loginitems, $suppress_icloud_setup, $hidden_preference_panes)
@@ -139,12 +84,13 @@ ${bluetooth}",
   $organization = hiera('managedmac::organization', 'SFU')
 
   mobileconfig { 'managedmac.mcx.alacarte':
-    ensure            => $ensure,
-    content           => $content,
-    description       => 'Custom MCX Settings',
-    displayname       => 'Managed Mac: Custom MCX',
-    organization      => $organization,
-    removaldisallowed => false,
+    ensure       => $ensure,
+    content      => $content,
+    description  => 'Custom MCX Settings',
+    displayname  => 'Managed Mac: Custom MCX',
+    organization => $organization,
+    #TODO confirm removal of this value
+    #removaldisallowed => false,
   }
 
 }

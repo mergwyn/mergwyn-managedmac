@@ -30,6 +30,7 @@ group :system_tests do
   gem "puppet-module-win-system-r#{minor_version}", '~> 1.0',   require: false, platforms: [:mswin, :mingw, :x64_mingw]
 end
 group :test do
+  gem "coveralls",                 require: false
   gem "CFPropertyList", '>=2.2.7', require: false
 end
 

@@ -10,7 +10,8 @@ module ManagedMacCommon
                               'PayloadDescription',
                               'PayloadDisplayName',
                               'PayloadOrganization',
-                              'PayloadRemovalDisallowed',
+                              # TODO: confirm deletion
+                              # 'PayloadRemovalDisallowed',
                               'PayloadScope',
                               'PayloadVersion'].freeze
 

@@ -162,7 +162,7 @@ describe 'managedmac::mcx', type: 'class' do
           { loginitems: 'foo' }
         end
 
-        it { is_expected.to raise_error(Puppet::Error, %r{not an Array}) }
+        it { is_expected.to raise_error(Puppet::PreformattedError, %r{Evaluation Error: Error while evaluating a Resource Statement}) }
       end
 
       context 'when $suppress_icloud_setup == false' do
@@ -238,7 +238,7 @@ describe 'managedmac::mcx', type: 'class' do
           { hidden_preference_panes: 'foo' }
         end
 
-        it { is_expected.to raise_error(Puppet::Error, %r{not an Array}) }
+        it { is_expected.to raise_error(Puppet::PreformattedError, %r{Evaluation Error: Error while evaluating a Resource Statement}) }
       end
     end
   end

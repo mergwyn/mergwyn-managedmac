@@ -2,16 +2,20 @@
 
 Copyright 2015, SFU.
 
+#### Table of Contents
+
+1. [Overview](#overview)
+2. [Module Description](#module-description)
+3. [Requirements](#requirements)
+3. [How Does it Work](#how-does-it-work)
+3. [What Can I do With This Thing](#What-can-i-do-with-this-thing)
+4. [Reference](REFERENCE.md)
+
 ## Overview
 
 A comprehensive collection of Puppet classes and types for managing OS X.
 
----
-#### Puppet Version 4.x is not currently supported
-
----
-
-## Description
+## Module Description
 
 This is a giant Puppet module. It abstracts all the things. It won't win any awards for being small and portable and pretty, because it does A LOT OF STUFF.
 
@@ -28,14 +32,6 @@ Some of this stuff is very useful, a lot of it is new, all of it is IN ONE PLACE
 * Raw Constructor classes for users, groups, etc.
 * Lots more...
 
-## Requirements
-
-* OS X 10.9 or greater
-* Puppet 3.x (No Puppet Version 4 support at this time)
-* puppetlabs-stdlib module
-* CFPropertyList gem
-* sqlite3 gem
-
 ## How does it work?
 
 This module was designed to be a world-engine for OS X.
@@ -46,9 +42,7 @@ By itself, it does nothing, but...
 
 Once, you've installed the components and created a configuration file, you have everything you need to begin terraforming.
 
-Example:
-
-    --
+    ---
     managedmac::organization: My Organization         # identify yourself
     managedmac::ntp::enable: true                     # turn on the ntp client
     managedmac::ntp::servers:                         # use a list of ntp servers
@@ -84,6 +78,7 @@ There are a number of classes included in this module; each one groups a specifi
 ## Custom Types
 
 There are a few custom types used in this module. Naturally, once you have installed the module, these types will be available to use in your own Puppet code if you don't fancy using any of the builtin classes.
+
 
 [Documentation on custom types and providers is available on the Github project page.](http://dayglojesus.github.io/managedmac/types)
 

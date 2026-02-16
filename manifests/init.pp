@@ -1,70 +1,45 @@
-# == Class: managedmac
+# @summary
+#   Module initializer.
 #
-# Module initializer.
-#
-# This module only supports OS X 10.9 or greater.
-#
-# === Parameters
-#
-# None
-#
-# === Variables
-#
-# [*osfamily*]
-#   The osfamily must be Darwin. If not, Puppet will fail.
-#
-# [*macosx_productversion_major*]
-#   The macosx_productversion_major must be 10.9 or greate. If not, Puppet
-#   will fail.
-#
-# === Examples
-#
+# @example
 #  include managedmac
 #
 #  class { managedmac: }
 #
-# === Authors
-#
-# Brian Warsing <bcw@sfu.ca>
-#
-# === Copyright
-#
-# Copyright 2015 SFU, unless otherwise noted.
-#
 class managedmac {
 
-  if $::osfamily != 'Darwin' {
-    fail("unsupported osfamily: ${::osfamily}")
+  if $facts['os']['family'] != 'Darwin' {
+    fail("unsupported osfamily: ${facts['os']['family']}")
   }
 
-  $min_os_version = '10.9'
+  $min_os_version = '11.0'
 
-  if version_compare($::macosx_productversion_major, $min_os_version) < 0 {
-    fail("unsupported product version: ${::macosx_productversion_major}")
+  if version_compare($facts['os']['version']['major'], $min_os_version) < 0 {
+    fail("unsupported product version: ${facts['os']['version']['major']}")
   }
 
-  contain managedmac::ntp
-  contain managedmac::activedirectory
-  contain managedmac::security
-  contain managedmac::desktop
-  contain managedmac::mcx
-  contain managedmac::filevault
-  contain managedmac::loginwindow
-  contain managedmac::softwareupdate
-  contain managedmac::energysaver
-  contain managedmac::portablehomes
-  contain managedmac::mounts
-  contain managedmac::loginhook
-  contain managedmac::logouthook
-  contain managedmac::sshd
-  contain managedmac::remotemanagement
-  contain managedmac::screensharing
-  contain managedmac::mobileconfigs
-  contain managedmac::propertylists
-  contain managedmac::execs
-  contain managedmac::files
-  contain managedmac::users
-  contain managedmac::groups
-  contain managedmac::cron
+  include managedmac::ntp
+  include managedmac::activedirectory
+  #include managedmac::security
+  include managedmac::desktop
+  include managedmac::mcx
+  include managedmac::filevault
+  include managedmac::loginwindow
+  include managedmac::softwareupdate
+  include managedmac::energysaver
+  #include managedmac::portablehomes
+  #include managedmac::mounts
+  include managedmac::loginhook
+  include managedmac::logouthook
+  #include managedmac::sshd
+  #include managedmac::remotemanagement
+  #include managedmac::screensharing
+  #include managedmac::mobileconfigs
+  #include managedmac::propertylists
+  include managedmac::execs
+  include managedmac::files
+  #include managedmac::users
+  include managedmac::groups
+  include managedmac::cron
 
 }

@@ -481,12 +481,12 @@ class managedmac::portablehomes (
   #validate_re ($enable, $enable_re_values)
 
   # Evaluate $enable as an OS X major version string and deduce a state
-  unless is_bool($enable) {
+  #unless is_bool($enable) {
     $os_conditional = versioncmp($enable, $::macosx_productversion_major) ? {
       0       => present,
       default => absent,
     }
-  }
+  #}
 
   # Set ensure according to defined logic
   $ensure = $enable ? {
@@ -502,30 +502,30 @@ class managedmac::portablehomes (
     #
     # VALIDATE INTEGERS
     #
-    unless is_integer($syncPeriodSeconds) {
-      fail("syncPeriodSeconds not an Integer: ${syncPeriodSeconds}")
-    }
-
-    unless is_integer($loginSyncDialogTimeoutSeconds) {
-      fail("loginSyncDialogTimeoutSeconds not an Integer: \
-${loginSyncDialogTimeoutSeconds}")
-    }
-
-    unless is_integer($logoutSyncDialogTimeoutSeconds) {
-      fail("logoutSyncDialogTimeoutSeconds not an Integer: \
-${logoutSyncDialogTimeoutSeconds}")
-    }
-
-    unless is_integer($progressDelaySeconds) {
-      fail("progressDelaySeconds not an Integer: ${progressDelaySeconds}")
-    }
-
-    #
-    # VALIDATE CONFLICT RESOLUTION
-    #
-    $allowed_conflict_res = ['automatic', 'showConflictDialogs',
-      'mobileHomeWins', 'mobileHomeCopy', 'networkHomeWins', 'networkHomeCopy'
-    ]
+#    unless is_integer($syncPeriodSeconds) {
+#      fail("syncPeriodSeconds not an Integer: ${syncPeriodSeconds}")
+#    }
+#
+#    unless is_integer($loginSyncDialogTimeoutSeconds) {
+#      fail("loginSyncDialogTimeoutSeconds not an Integer: \
+#${loginSyncDialogTimeoutSeconds}")
+#    }
+#
+#    unless is_integer($logoutSyncDialogTimeoutSeconds) {
+#      fail("logoutSyncDialogTimeoutSeconds not an Integer: \
+#${logoutSyncDialogTimeoutSeconds}")
+#    }
+#
+#    unless is_integer($progressDelaySeconds) {
+#      fail("progressDelaySeconds not an Integer: ${progressDelaySeconds}")
+#    }
+#
+#    #
+#    # VALIDATE CONFLICT RESOLUTION
+#    #
+#    $allowed_conflict_res = ['automatic', 'showConflictDialogs',
+#      'mobileHomeWins', 'mobileHomeCopy', 'networkHomeWins', 'networkHomeCopy'
+#    ]
 
     unless member($allowed_conflict_res, $loginPrefSyncConflictResolution) {
       fail("Parameter Error: invalid value for \
@@ -600,34 +600,34 @@ ${syncBackgroundSetInBackground}")
     #
     # VALIDATE BOOL OPTIONS
     #
-    validate_bool ($menuExtra)
-    validate_bool ($warnOnCreateAllowNever)
-    validate_bool ($createAtLogin)
-    validate_bool ($createPHDAtLogin)
-    validate_bool ($warnOnCreate)
-    validate_bool ($isNewMobileAccount)
-    validate_bool ($periodicSyncOn)
-    validate_bool ($syncOnChange)
-    validate_bool ($replaceUserSyncList)
-    validate_bool ($replaceUserPrefSyncList)
-    validate_bool ($loginPrefSuppressErrors)
-    validate_bool ($loginNonprefSuppressErrors)
-    validate_bool ($logoutPrefSuppressErrors)
-    validate_bool ($logoutNonprefSuppressErrors)
-    validate_bool ($backgroundSuppressErrors)
-    validate_bool ($firstSyncSuppressErrors)
-    validate_bool ($syncNowAllPrefsSuppressErrors)
-    validate_bool ($loginPrefSuppressConflicts)
-    validate_bool ($loginNonprefSuppressConflicts)
-    validate_bool ($logoutPrefSuppressConflicts)
-    validate_bool ($logoutNonprefSuppressConflicts)
-    validate_bool ($backgroundSuppressConflicts)
-    validate_bool ($firstSyncSuppressConflicts)
-    validate_bool ($syncNowAllPrefsSuppressConflicts)
-    validate_bool ($disableFirstSyncCancel)
-    validate_bool ($disableLoginSyncCancel)
-    validate_bool ($disableLogoutSyncCancel)
-    validate_bool ($alertOnFailedMounts)
+   # validate_bool ($menuExtra)
+   # validate_bool ($warnOnCreateAllowNever)
+   # validate_bool ($createAtLogin)
+   # validate_bool ($createPHDAtLogin)
+   # validate_bool ($warnOnCreate)
+   # validate_bool ($isNewMobileAccount)
+   # validate_bool ($periodicSyncOn)
+   # validate_bool ($syncOnChange)
+   # validate_bool ($replaceUserSyncList)
+   # validate_bool ($replaceUserPrefSyncList)
+   # validate_bool ($loginPrefSuppressErrors)
+   # validate_bool ($loginNonprefSuppressErrors)
+   # validate_bool ($logoutPrefSuppressErrors)
+   # validate_bool ($logoutNonprefSuppressErrors)
+   # validate_bool ($backgroundSuppressErrors)
+   # validate_bool ($firstSyncSuppressErrors)
+   # validate_bool ($syncNowAllPrefsSuppressErrors)
+   # validate_bool ($loginPrefSuppressConflicts)
+   # validate_bool ($loginNonprefSuppressConflicts)
+   # validate_bool ($logoutPrefSuppressConflicts)
+   # validate_bool ($logoutNonprefSuppressConflicts)
+   # validate_bool ($backgroundSuppressConflicts)
+   # validate_bool ($firstSyncSuppressConflicts)
+   # validate_bool ($syncNowAllPrefsSuppressConflicts)
+   # validate_bool ($disableFirstSyncCancel)
+   # validate_bool ($disableLoginSyncCancel)
+   # validate_bool ($disableLogoutSyncCancel)
+   # validate_bool ($alertOnFailedMounts)
 
   } else {
     unless $ensure == absent {

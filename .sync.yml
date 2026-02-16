@@ -6,6 +6,7 @@ appveyor.yml:
 .vscode/extensions.json:
   delete: true
 .travis.yml:
+  simplecov: true
   notifications:
     email:
       recipients:
@@ -18,6 +19,7 @@ Rakefile:
 Gemfile:
   required:
     ':test':
+      - gem: coveralls
       - gem: CFPropertyList
         version: '>=2.2.7'
 .rubocop.yml:
@@ -30,6 +32,6 @@ Gemfile:
 spec/spec_helper.rb:
   coverage_report: true
   mock_with: ':rspec'
-  minimum_code_coverage_percentage: 0
+  minimum_code_coverage_percentage: 100
   strict_level: ":warning"
   hiera_config: "hiera.yaml"

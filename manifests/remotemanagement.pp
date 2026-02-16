@@ -142,19 +142,19 @@ class managedmac::remotemanagement (
 
   unless $enable == undef {
 
-    validate_bool ($enable)
+    # validate_bool ($enable)
 
-    validate_bool   ($allow_all_users)
-    validate_string ($all_users_privs)
-    validate_bool   ($enable_menu_extra)
-    validate_bool   ($enable_dir_logins)
-    validate_array  ($allowed_dir_groups)
-    validate_bool   ($enable_legacy_vnc)
-    validate_string ($vnc_password)
-    validate_bool   ($allow_vnc_requests)
-    validate_bool   ($allow_webm_requests)
-    validate_hash   ($users)
-    validate_bool   ($strict)
+    # validate_bool   ($allow_all_users)
+    # validate_string ($all_users_privs)
+    # validate_bool   ($enable_menu_extra)
+    # validate_bool   ($enable_dir_logins)
+    # validate_array  ($allowed_dir_groups)
+    # validate_bool   ($enable_legacy_vnc)
+    # validate_string ($vnc_password)
+    # validate_bool   ($allow_vnc_requests)
+    # validate_bool   ($allow_webm_requests)
+    # validate_hash   ($users)
+    # validate_bool   ($strict)
 
     $ensure = $enable ? {
       true     => running,
